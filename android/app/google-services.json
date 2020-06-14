@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "191260197743",
+    "firebase_url": "https://ajeeb-3f147.firebaseio.com",
+    "project_id": "ajeeb-3f147",
+    "storage_bucket": "ajeeb-3f147.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191260197743:android:f8c2bd6c4524d1612a1e9a",
+        "android_client_info": {
+          "package_name": "com.packages.ajeeb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191260197743-apr8fjovco6dhjdd7nh0lfdohj6eic93.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaQ2TF8X8zVQ5596KjfxTmXZKy_PPGvQQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "191260197743-apr8fjovco6dhjdd7nh0lfdohj6eic93.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
