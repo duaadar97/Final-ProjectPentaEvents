@@ -1,31 +1,30 @@
+import 'package:ajeeb/screens/Customer/Booking.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:ajeeb/screens/EventManager/homeEvent.dart';
+
 
 import '../Categories.dart';
 import '../Services.dart';
 import '../Themes.dart';
-
 //void main() {
 //  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: ProfilePage()));
 //}
-class ProfilePage extends StatefulWidget {
+class ProfilePageEvent extends StatefulWidget {
 
   final DocumentSnapshot document;
-  ProfilePage({this.document});
+  ProfilePageEvent({this.document});
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _ProfilePageState();
+    return _ProfilePageEventState(document);
   }
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageEventState extends State<ProfilePageEvent> {
   DocumentSnapshot document;
-
-
+  _ProfilePageEventState(this.document);
   List<Widget> _buildGridTiles(List portfolio) {
 
     List<Container> containers = new List<Container>.generate(portfolio.length,
@@ -50,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: new AppBar(
         title: new Text('Upload Image'),
         centerTitle: true,
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.teal[400],
         elevation: 0.0,
       ),
       body: Container(
@@ -71,26 +70,15 @@ class _ProfilePageState extends State<ProfilePage> {
             appBar: new AppBar(
               title: new Text('Penta Events'),
               backgroundColor: Colors.teal,
-
             ),
             drawer: new Drawer(
               child: new ListView(
-//                children: snapshot.data.documents
-//                    .map((DocumentSnapshot document)
                 children: <Widget>[
                   new UserAccountsDrawerHeader(
                     decoration: BoxDecoration(color: Colors.teal),
-                    accountName: new Text(widget.document.data['Event_orgName']),
-                    accountEmail: new Text(widget.document.data['Event_email']),
-//                    currentAccountPicture: new GestureDetector(
-//                      child: new CircleAvatar(
-//                        backgroundImage: AssetImage('assets/cust.jpg'),
-//                      ),
-//                    ),
+                    accountName: new Text(this.document.data["Event_orgName"]),
+                    accountEmail: new Text(this.document.data["Event_email"]),
                   ),
-
-
-
                   new ListTile(
                     leading: new Icon(Icons.category),
                     title: new Text('Categories'),
@@ -122,12 +110,22 @@ class _ProfilePageState extends State<ProfilePage> {
                       }));
                     },
                   ),
+                  /*new ListTile(
+                                      leading: new Icon(Icons.edit),
+                                      title: new Text('Edit Profile'),
+                                      onTap: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                          return EditCredentials();
+                                        }));
+                                      },
+
+                                    )*/
                 ],
               ),
             ),
 
 
-            body:  Container(
+            body: Container(
                 decoration: new BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
@@ -461,3 +459,4 @@ class _ProfilePageState extends State<ProfilePage> {
         ));
   }
 }
+

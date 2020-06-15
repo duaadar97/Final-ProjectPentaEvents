@@ -75,15 +75,28 @@ fetchFromFirebase (){
           decoration: new BoxDecoration(
             image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage('assets/des.jpg')),
+                image: AssetImage('assets/background15.jpg')),
           ),
-        child: ListView(
-          children: listdata.map((document) {
-            return new ListTile(
-              title: new Text(document),
-             
-            );
-          }).toList(),
+        child: Center(
+          child:listdata.length==0?Text("No Service",
+            style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
+          )
+              :  ListView(
+            children: listdata.map((document) {
+              return Column(
+                children: <Widget>[
+                  new ListTile(
+                    title: new Text(document),
+
+                  ),
+                  new Divider(height: 2.0,),
+                ],
+              );
+            }).toList(),
+          ),
         ),
       ),
       )

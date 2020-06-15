@@ -212,269 +212,243 @@ fetchFromFirebase (){
       body: Container(
         decoration: new BoxDecoration(
           image: DecorationImage(
-              fit: BoxFit.cover, image: AssetImage('assets/backgorund3.jpg')),
+              fit: BoxFit.cover,
+              image: AssetImage('assets/background15.jpg')),
         ),
         // width: MediaQuery.of(context).size.width,
         // height: MediaQuery.of(context).size.height * 0.80,
-        child: Column(
-          children: <Widget>[
-            Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(top: 50),
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                        width: MediaQuery.of(context).size.width * 0.38,
-                        margin: EdgeInsets.only(left: 17),
-                        child: Column(children: <Widget>[
-                          TextFormField(
-                            onChanged: (text) {
-                              print(text);
-                              name = text;
-                            },
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(1.0)),
-                                  borderSide: BorderSide(color: Colors.teal)),
-                              contentPadding:
-                                  EdgeInsets.only(top: 40.0, left: 10),
-                              hintText: "Name...",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          TextFormField(
-                            onChanged: (text) {
-                              phone = text;
-                            },
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(1.0)),
-                                  borderSide: BorderSide(color: Colors.teal)),
-                              contentPadding:
-                                  EdgeInsets.only(top: 40.0, left: 10),
-                              hintText: "Phone...",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          TextFormField(
-                            onChanged: (text) {
-                              address = text;
-                            },
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(1.0)),
-                                  borderSide: BorderSide(color: Colors.teal)),
-                              contentPadding:
-                                  EdgeInsets.only(top: 40.0, left: 10),
-                              hintText: "Address...",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          TextFormField(
-                            onChanged: (text) {
-                              email = text;
-                            },
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(1.0)),
-                                  borderSide: BorderSide(color: Colors.teal)),
-                              contentPadding:
-                                  EdgeInsets.only(top: 40.0, left: 10),
-                              hintText: "Email...",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          dropdownmenu(catlist,"cat"),
-                          // buildListSelectionWidget(catlist,"cat"),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          TextFormField(
-                            onChanged: (text) {
-                              noofpeople = text;
-                            },
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(1.0)),
-                                  borderSide: BorderSide(color: Colors.teal)),
-                              contentPadding:
-                                  EdgeInsets.only(top: 40.0, left: 10),
-                              hintText: "No of People...",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                            ),
-                          ),
-                        ])),
-                    Container(
-
-                      // changes  
-                      
-                        width: MediaQuery.of(context).size.width * 0.40,
-                        margin: EdgeInsets.only(left: 15),
-                        child: Column(children: <Widget>[
-                           dropdownmenu(servicelist, "service"),
-                          // buildListSelectionWidget(servicelist, "service"),
-                          SizedBox(
-                            height: 15,
-                          ),
-                           dropdownmenu(themelist, "theme"),
-                          // buildListSelectionWidget(themelist, "theme"),
-                          SizedBox(
-                            height: 15,
-                          ),
-                           dropdownmenu(packagelist, "package"),
-                          // buildListSelectionWidget(packagelist, "package"),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          FlatButton(
-                            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              onPressed: () {
-                                DatePicker.showDatePicker(context,
-                                    showTitleActions: true,
-                                    minTime: DateTime(2020, 1, 5),
-                                    maxTime: DateTime(2040, 12, 7),
-                                    onChanged: (date) {
-                                  print('change $date');
-                                }, onConfirm: (date) {
-                                  startdate = date.toString().split(" ")[0];
-                                  print('confirm $date');
-                                  this.setState((){
-                                    startdate  = startdate;
-                                  });
-                                },
-                                    currentTime: DateTime.now(),
-                                    locale: LocaleType.en);
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.only(top: 135),
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                          width: MediaQuery.of(context).size.width * 0.40,
+                          margin: EdgeInsets.only(left: 28),
+                          child: Column(children: <Widget>[
+                            TextFormField(
+                              onChanged: (text) {
+                                print(text);
+                                name = text;
                               },
-                              child: Container(
-                              // margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              alignment: Alignment.center,
-                              height: 60,
-                              width: 500,
-                              decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0),
-                                border: Border.all(
-                                    color: Colors.black.withOpacity(0.4), // set border color
-                                    width: 1.0), // set border width
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(15.0)), // set rounded corner radius
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(1.0)),
+                                    borderSide: BorderSide(color: Colors.teal)),
+                                contentPadding:
+                                    EdgeInsets.only(top: 40.0, left: 10),
+                                hintText: "Name...",
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
                               ),
-                              child:Text(startdate)
-                             ),
-                          ),
-
-                          SizedBox(
-                            height: 15,
-                          ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            TextFormField(
+                              onChanged: (text) {
+                                phone = text;
+                              },
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(1.0)),
+                                    borderSide: BorderSide(color: Colors.teal)),
+                                contentPadding:
+                                    EdgeInsets.only(top: 40.0, left: 10),
+                                hintText: "Phone...",
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            TextFormField(
+                              onChanged: (text) {
+                                address = text;
+                              },
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(1.0)),
+                                    borderSide: BorderSide(color: Colors.teal)),
+                                contentPadding:
+                                    EdgeInsets.only(top: 40.0, left: 10),
+                                hintText: "Address...",
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            TextFormField(
+                              onChanged: (text) {
+                                email = text;
+                              },
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(1.0)),
+                                    borderSide: BorderSide(color: Colors.teal)),
+                                contentPadding:
+                                    EdgeInsets.only(top: 40.0, left: 10),
+                                hintText: "Email...",
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            TextFormField(
+                              onChanged: (text) {
+                                noofpeople = text;
+                              },
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(1.0)),
+                                    borderSide: BorderSide(color: Colors.teal)),
+                                contentPadding:
+                                    EdgeInsets.only(top: 40.0, left: 10),
+                                hintText: "No of People...",
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                              ),
+                            ),
+                          ])),
+                      Container(
+                          width: MediaQuery.of(context).size.width * 0.40,
+                          margin: EdgeInsets.only(left: 15),
+                          child: Column(children: <Widget>[
+                             dropdownmenu(servicelist, "service"),
+                            // buildListSelectionWidget(servicelist, "service"),
+                            SizedBox(
+                              height: 15,
+                            ),
+                             dropdownmenu(themelist, "theme"),
+                            // buildListSelectionWidget(themelist, "theme"),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            dropdownmenu(catlist,"cat"),
+                            // buildListSelectionWidget(packagelist, "package"),
+                            SizedBox(
+                              height: 15,
+                            ),
                             FlatButton(
-                            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              onPressed: () {
-                                DatePicker.showDatePicker(context,
-                                    showTitleActions: true,
-                                    minTime: DateTime(2020, 1, 5),
-                                    maxTime: DateTime(2040, 12, 7),
-                                    onChanged: (date) {
-                                  print('change $date');
-                                }, onConfirm: (date){
-                                  enddate = date.toString().split(" ")[0];
-                                  print('confirm $enddate');
-                                  this.setState((){
-                                    enddate  = enddate;
-                                  });
+                              padding: EdgeInsets.fromLTRB(3, 0, 3, 0),
+                                onPressed: () {
+                                  DatePicker.showDatePicker(context,
+                                      showTitleActions: true,
+                                      minTime: DateTime(2020, 1, 5),
+                                      maxTime: DateTime(2040, 12, 7),
+                                      onChanged: (date) {
+                                    print('change $date');
+                                  }, onConfirm: (date) {
+                                    startdate = date.toString().split(" ")[0];
+                                    print('confirm $date');
+                                    this.setState((){
+                                      startdate  = startdate;
+                                    });
+                                  },
+                                      currentTime: DateTime.now(),
+                                      locale: LocaleType.en);
                                 },
-                                    currentTime: DateTime.now(),
-                                    locale: LocaleType.en);
-                              },
-                              child: Container(
-                              // margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              alignment: Alignment.center,
-                              height: 60,
-                              width: 500,
-                              decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0),
-                                border: Border.all(
-                                    color: Colors.black.withOpacity(0.4), // set border color
-                                    width: 1.0), // set border width
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(15.0)), // set rounded corner radius
-                              ),
-                              child:Text(enddate)
-                             ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          TextFormField(
-                            onChanged: (text) {
-                              // estimatedcost = text;
-                            },
-                            
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(1.0)),
-                                  borderSide: BorderSide(color: Colors.teal)),
-                              contentPadding:
-                                  EdgeInsets.only(top: 40.0, left: 10),
-                              hintText: "Est cost: "+estimatedcost,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
+                                child: Container(
+                                // margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                alignment: Alignment.center,
+                                height: 60,
+                                width: 500,
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0),
+                                  border: Border.all(
+                                      color: Colors.black.withOpacity(0.4), // set border color
+                                      width: 1.0), // set border width
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(15.0)), // set rounded corner radius
+                                ),
+                                child:Text(startdate)
+                               ),
                             ),
-                          ),
-                        ]))
-                  ],
-                )),
-            SizedBox(
-              height: 35,
-            ),
-            Container(
-              margin: EdgeInsets.all(8.0),
-              height: 55.0,
-              width: 200.0,
-              child: RaisedButton(
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(15.0),
-                ),
-                textColor: Colors.white,
-                onPressed: () {
-                  confirmBooking(context);
-                },
-                child: Text("Book"),
-                elevation: 6.0,
-                //splashColor: Colors.black12,
-                color: Colors.teal,
+
+                            SizedBox(
+                              height: 15,
+                            ),
+                            FlatButton(
+                              padding: EdgeInsets.fromLTRB(3, 0, 3, 0),
+                                onPressed: () {
+                                  DatePicker.showDatePicker(context,
+                                      showTitleActions: true,
+                                      minTime: DateTime(2020, 1, 5),
+                                      maxTime: DateTime(2040, 12, 7),
+                                      onChanged: (date) {
+                                    print('change $date');
+                                  }, onConfirm: (date){
+                                    enddate = date.toString().split(" ")[0];
+                                    print('confirm $enddate');
+                                    this.setState((){
+                                      enddate  = enddate;
+                                    });
+                                  },
+                                      currentTime: DateTime.now(),
+                                      locale: LocaleType.en);
+                                },
+                                child: Container(
+                                // margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                alignment: Alignment.center,
+                                height: 60,
+                                width: 500,
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0),
+                                  border: Border.all(
+                                      color: Colors.black.withOpacity(0.4), // set border color
+                                      width: 1.0), // set border width
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(15.0)), // set rounded corner radius
+                                ),
+                                child:Text(enddate)
+                               ),
+                            ),
+                          ]))
+                    ],
+                  )),
+              SizedBox(
+                height: 74,
               ),
-            ),
-          ],
+              Container(
+                margin: EdgeInsets.all(8.0),
+                height: 55.0,
+                width: 200.0,
+                child: RaisedButton(
+                  shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(15.0),
+                  ),
+                  textColor: Colors.white,
+                  onPressed: () {
+                    confirmBooking(context);
+                  },
+                  child: Text("Book"),
+                  elevation: 6.0,
+                  //splashColor: Colors.black12,
+                  color: Colors.teal,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -603,36 +577,7 @@ fetchFromFirebase (){
   }
 }
 
-// void confirmBookingbackup(BuildContext context) {
-//   var alertDialog=AlertDialog(
-//     title:Text("Event Booked Successfully "),
-//     content:Text("Have a Happy event! "),
-//       actions: <Widget>[
-//         RaisedButton(
-//           shape: new RoundedRectangleBorder(
-//             borderRadius: new BorderRadius.circular(15.0),
-//           ),
-//           child: Text('Ok'),
-//           onPressed: () {
-// //            Navigator.push(context, MaterialPageRoute(builder: (context) {
-// //              return CustLogIn();
-// //            }));
-//           },
-//           elevation: 10.0,
-//           color: Colors.teal,
-//         )
-//       ]
 
-//   );
-
-//   showDialog(
-//       context:context,
-//       builder: (BuildContext context){
-//         return alertDialog;
-//       }
-//   );
-
-// }
 
 
 

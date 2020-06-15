@@ -42,16 +42,22 @@ class  Credentials extends StatefulWidget {
 }
 
 class _CredentialsState extends State<Credentials> {
-  final _formKey = GlobalKey<FormState>();
+  final _formKey1 = GlobalKey<FormState>();
+  final _formKey2 = GlobalKey<FormState>();
+  final _formKey3 = GlobalKey<FormState>();
+  final _formKey4 = GlobalKey<FormState>();
+  final _formKey5 = GlobalKey<FormState>();
+  final _formKey6 = GlobalKey<FormState>();
+
 
 
   // text field state
-  String username = '';
-  String address = '';
-  String cnic = '';
-  String phone_no = '';
-  String organizationName='';
-  String servingAreas='';
+  String _username = '';
+  String _address = '';
+  String _cnic = '';
+  String _phone_no = '';
+  String _organizationName='';
+  String _servingAreas='';
 
   Future updateUsername(String name)async{
     final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -108,7 +114,7 @@ class _CredentialsState extends State<Credentials> {
               backgroundColor: Colors.white,
               resizeToAvoidBottomPadding: false,
               appBar: AppBar(
-                backgroundColor: Colors.teal[400],
+                backgroundColor: Colors.teal,
                 elevation: 0.0,
                 title: Text('Edit Credentials'),
                 leading: IconButton(
@@ -129,7 +135,7 @@ class _CredentialsState extends State<Credentials> {
                       decoration: new BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage('assets/backgorund3.jpg')),
+                            image: AssetImage('assets/background15.jpg')),
                       ),
                       child: Column(
                         children: <Widget>[
@@ -152,7 +158,7 @@ class _CredentialsState extends State<Credentials> {
                                     IconButton(
                                       icon: Icon(Icons.edit),
                                       onPressed: (){
-                                        _username(context);
+                                        _Updateusername(context,managerData.username);
                                       },
                                     ),
                                     new Divider(height: 2.0,),
@@ -179,7 +185,7 @@ class _CredentialsState extends State<Credentials> {
                                     IconButton(
                                       icon: Icon(Icons.edit),
                                       onPressed: (){
-                                          _phoneNo(context);
+                                          _UpdatephoneNo(context,managerData.phone);
                                       },
                                     ),
                                     new Divider(height: 2.0,),
@@ -206,7 +212,7 @@ class _CredentialsState extends State<Credentials> {
                                     IconButton(
                                       icon: Icon(Icons.edit),
                                       onPressed: (){
-                                        _cnic(context);
+                                        _Updatecnic(context,managerData.cnic);
                                       },
                                     ),
                                     new Divider(height: 2.0,),
@@ -233,7 +239,7 @@ class _CredentialsState extends State<Credentials> {
                                     IconButton(
                                       icon: Icon(Icons.edit),
                                       onPressed: (){
-                                        _address(context);
+                                        _Updateaddress(context,managerData.address);
                                       },
                                     ),
                                     new Divider(height: 2.0,),
@@ -260,7 +266,7 @@ class _CredentialsState extends State<Credentials> {
                                     IconButton(
                                       icon: Icon(Icons.edit),
                                       onPressed: (){
-                                        _orgName(context);
+                                        _UpdateorgName(context,managerData.orgName);
                                       },
                                     ),
                                     new Divider(height: 2.0,),
@@ -287,7 +293,7 @@ class _CredentialsState extends State<Credentials> {
                                     IconButton(
                                       icon: Icon(Icons.edit),
                                       onPressed: (){
-                                        _areas(context);
+                                        _Updateareas(context,managerData.servingAreas);
                                       },
                                     ),
                                     new Divider(height: 2.0,),
@@ -317,51 +323,79 @@ class _CredentialsState extends State<Credentials> {
     );
 
   }
-  Future<void> _username(BuildContext context){
-    return showDialog(context: context, builder: (BuildContext context){
-          final manager = Provider.of<EventManager>(context);
-          return StreamBuilder<EventManager>(stream:EventManager(uid: manager.uid).managerdata, builder: (context, snapshot) {
-                if(snapshot.hasData){EventManager managerData=snapshot.data;
-                  return AlertDialog(shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                    backgroundColor: Colors.white, title: Text("Edit Username", style: TextStyle(fontWeight: FontWeight.bold, fontStyle: FontStyle.italic, fontSize: 25.0,),),
-                    content: SingleChildScrollView(child: Form(key: _formKey,
-                        child: ListBody(children: <Widget>[
-                            TextFormField(initialValue: managerData.username, autofocus: false, decoration: new InputDecoration(
-                                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(1.0)),
-                                  borderSide: BorderSide(color: Colors.teal, style: BorderStyle.solid, width: 2.5,),),
-                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0),),),
-                              keyboardType: TextInputType.text, textInputAction: TextInputAction.next,validator: (val) {
-                                //Pattern pattern = r'^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$';
-                                Pattern pattern = r'^[a-z0-9_-]{3,15}$';
-                                RegExp regex = new RegExp(pattern);
-                                if (val.isEmpty) {
-                                  return 'Please enter username';
-                                } else if (!regex.hasMatch(val))
-                                  return 'Invalid username';
-                                else
-                                  return null;
-                              }, onChanged: (val){setState(() => username = val);},),
-                            SizedBox(height: 10.0),
-                            RaisedButton(shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15.0),
-                                  side: BorderSide(color: Colors.teal, style: BorderStyle.solid, width: 2.0,),),
-                                child: Text('Done', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, color: Colors.white),),
-                                elevation: 10.0, color: Colors.teal,
-                                onPressed: ()async {
-                                  if(_formKey.currentState.validate()){
-                                    await updateUsername(username ?? managerData.username);
-                                    Navigator.of(context).pop();}})],),),),);}else{return Loading();}});});}
+  Future<void> _Updateusername(BuildContext context, String username){
+    return showDialog(context: context, builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        backgroundColor: Colors.white,
+        title: Text("Edit Username",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+            fontSize: 25.0,),),
+        content: SingleChildScrollView(
+          child: Form(key: _formKey1,
+            child: ListBody(
+              children: <Widget>[
+                TextFormField(
+                  initialValue: username,
+                  autofocus: false,
+                  decoration: new InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(1.0)),
+                      borderSide: BorderSide(
+                        color: Colors.teal,
+                        style: BorderStyle.solid,
+                        width: 2.5,),),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),),),
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                  validator: (val) {
+                    //Pattern pattern = r'^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$';
+                    Pattern pattern = r'^[a-z0-9_-]{3,15}$';
+                    RegExp regex = new RegExp(pattern);
+                    if (val.isEmpty) {
+                      return 'Please enter username';
+                    } else if (!regex.hasMatch(val))
+                      return 'Invalid username';
+                    else
+                      return null;
+                  },
+                  onChanged: (val) {
+                    setState(() => _username = val);
+                  },),
+                SizedBox(height: 10.0),
+                RaisedButton(shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(15.0),
+                  side: BorderSide(color: Colors.teal,
+                    style: BorderStyle.solid, width: 2.0,),),
+                    child: Text('Done',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25.0,
+                          color: Colors.white),),
+                    elevation: 10.0,
+                    color: Colors.teal,
+                    onPressed: () async {
+                      if (_formKey1.currentState.validate()) {
+                        await updateUsername(_username ?? username);
+                        Navigator.of(context).pop();
+                      }
+                    })
+              ],),),),);
+    } );
+    }
 
 
-  Future<void> _phoneNo(BuildContext context){
+  Future<void> _UpdatephoneNo(BuildContext context,phone){
     return showDialog(context: context, builder: (BuildContext context){
-      final manager = Provider.of<EventManager>(context);
-      return StreamBuilder<EventManager>(stream:EventManager(uid: manager.uid).managerdata, builder: (context, snapshot) {
-        if(snapshot.hasData){EventManager managerData=snapshot.data;
         return AlertDialog(shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
           backgroundColor: Colors.white, title: Text("Edit Phone Number", style: TextStyle(fontWeight: FontWeight.bold, fontStyle: FontStyle.italic, fontSize: 25.0,),),
-          content: SingleChildScrollView(child: Form(key: _formKey,
+          content: SingleChildScrollView(child: Form(key: _formKey2,
             child: ListBody(children: <Widget>[
-              TextFormField(initialValue: managerData.phone, autofocus: false, decoration: new InputDecoration(
+              TextFormField(initialValue: phone, autofocus: false, decoration: new InputDecoration(
                 focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(1.0)),
                   borderSide: BorderSide(color: Colors.teal, style: BorderStyle.solid, width: 2.5,),),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0),),),
@@ -376,28 +410,25 @@ class _CredentialsState extends State<Credentials> {
                     return 'please enter a valid phone no';
                   else
                     return null;
-                }, onChanged: (val){setState(() => phone_no = val);},),
+                }, onChanged: (val){setState(() => _phone_no = val);},),
               SizedBox(height: 10.0),
               RaisedButton(shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15.0),
                 side: BorderSide(color: Colors.teal, style: BorderStyle.solid, width: 2.0,),),
                   child: Text('Done', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, color: Colors.white),),
                   elevation: 10.0, color: Colors.teal,
                   onPressed: ()async {
-                    if(_formKey.currentState.validate()){
-                      await updatePhoneNo(phone_no ?? managerData.phone);
-                      Navigator.of(context).pop();}})],),),),);}else{return Loading();}});});}
+                    if(_formKey2.currentState.validate()){
+                      await updatePhoneNo(_phone_no ??phone);
+                      Navigator.of(context).pop();}})],),),),);});}
 
 
-  Future<void> _cnic(BuildContext context){
+  Future<void> _Updatecnic(BuildContext context,String cnic){
     return showDialog(context: context, builder: (BuildContext context){
-      final manager = Provider.of<EventManager>(context);
-      return StreamBuilder<EventManager>(stream:EventManager(uid: manager.uid).managerdata, builder: (context, snapshot) {
-        if(snapshot.hasData){EventManager managerData=snapshot.data;
         return AlertDialog(shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
           backgroundColor: Colors.white, title: Text("Edit Cnic", style: TextStyle(fontWeight: FontWeight.bold, fontStyle: FontStyle.italic, fontSize: 25.0,),),
-          content: SingleChildScrollView(child: Form(key: _formKey,
+          content: SingleChildScrollView(child: Form(key: _formKey3,
             child: ListBody(children: <Widget>[
-              TextFormField(initialValue: managerData.cnic, autofocus: false, decoration: new InputDecoration(
+              TextFormField(initialValue: cnic, autofocus: false, decoration: new InputDecoration(
                 focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(1.0)),
                   borderSide: BorderSide(color: Colors.teal, style: BorderStyle.solid, width: 2.5,),),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0),),),
@@ -413,28 +444,25 @@ class _CredentialsState extends State<Credentials> {
                     return 'please enter a valid cnic';
                   else
                     return null;
-                },onChanged: (val){setState(() => cnic = val);},),
+                },onChanged: (val){setState(() => _cnic = val);},),
               SizedBox(height: 10.0),
               RaisedButton(shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15.0),
                 side: BorderSide(color: Colors.teal, style: BorderStyle.solid, width: 2.0,),),
                   child: Text('Done', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, color: Colors.white),),
                   elevation: 10.0, color: Colors.teal,
                   onPressed: ()async {
-                    if(_formKey.currentState.validate()){
-                      await updateCnic(cnic ?? managerData.cnic);
-                      Navigator.of(context).pop();}})],),),),);}else{return Loading();}});});}
+                    if(_formKey3.currentState.validate()){
+                      await updateCnic(_cnic ?? cnic);
+                      Navigator.of(context).pop();}})],),),),);});}
 
 
-  Future<void> _address(BuildContext context){
+  Future<void> _Updateaddress(BuildContext context, String address){
     return showDialog(context: context, builder: (BuildContext context){
-      final manager = Provider.of<EventManager>(context);
-      return StreamBuilder<EventManager>(stream:EventManager(uid: manager.uid).managerdata, builder: (context, snapshot) {
-        if(snapshot.hasData){EventManager managerData=snapshot.data;
         return AlertDialog(shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
           backgroundColor: Colors.white, title: Text("Edit Address", style: TextStyle(fontWeight: FontWeight.bold, fontStyle: FontStyle.italic, fontSize: 25.0,),),
-          content: SingleChildScrollView(child: Form(key: _formKey,
+          content: SingleChildScrollView(child: Form(key: _formKey4,
             child: ListBody(children: <Widget>[
-              TextFormField(initialValue: managerData.address, autofocus: false, decoration: new InputDecoration(
+              TextFormField(initialValue: address, autofocus: false, decoration: new InputDecoration(
                 focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(1.0)),
                   borderSide: BorderSide(color: Colors.teal, style: BorderStyle.solid, width: 2.5,),),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0),),),
@@ -447,35 +475,32 @@ class _CredentialsState extends State<Credentials> {
                                     return 'please enter a valid address';
                                   else
                                     return null;
-                                },onChanged: (val){setState(() => address = val);},),
+                                },onChanged: (val){setState(() => _address = val);},),
               SizedBox(height: 10.0),
               RaisedButton(shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15.0),
                 side: BorderSide(color: Colors.teal, style: BorderStyle.solid, width: 2.0,),),
                   child: Text('Done', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, color: Colors.white),),
                   elevation: 10.0, color: Colors.teal,
                   onPressed: ()async {
-                    if(_formKey.currentState.validate()){
-                      await updateAddress(address ?? managerData.address);
-                      Navigator.of(context).pop();}})],),),),);}else{return Loading();}});});}
+                    if(_formKey4.currentState.validate()){
+                      await updateAddress(_address ?? address);
+                      Navigator.of(context).pop();}})],),),),);});}
 
 
-  Future<void> _orgName(BuildContext context){
+  Future<void> _UpdateorgName(BuildContext context,orgName){
     return showDialog(context: context, builder: (BuildContext context){
-      final manager = Provider.of<EventManager>(context);
-      return StreamBuilder<EventManager>(stream:EventManager(uid: manager.uid).managerdata, builder: (context, snapshot) {
-        if(snapshot.hasData){EventManager managerData=snapshot.data;
         return AlertDialog(shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
           backgroundColor: Colors.white, title: Text("Edit Organization Name", style: TextStyle(fontWeight: FontWeight.bold, fontStyle: FontStyle.italic, fontSize: 25.0,),),
-          content: SingleChildScrollView(child: Form(key: _formKey,
+          content: SingleChildScrollView(child: Form(key: _formKey5,
             child: ListBody(children: <Widget>[
-              TextFormField(initialValue: managerData.orgName, autofocus: false, decoration: new InputDecoration(
+              TextFormField(initialValue: orgName, autofocus: false, decoration: new InputDecoration(
                 focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(1.0)),
                   borderSide: BorderSide(color: Colors.teal, style: BorderStyle.solid, width: 2.5,),),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0),),),
                 keyboardType: TextInputType.text, textInputAction: TextInputAction.next,
                 validator: (val) {
                   //Pattern pattern = r'^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$';
-                  Pattern pattern = r'^[a-z0-9_-]{3,15}$';
+                  Pattern pattern = r'^[a-zA-Z0-9_-]{3,15}$';
                   RegExp regex = new RegExp(pattern);
                   if (val.isEmpty) {
                     return 'Please enter Organization Name';
@@ -483,29 +508,26 @@ class _CredentialsState extends State<Credentials> {
                     return 'Invalid Organization Name';
                   else
                     return null;
-                },onChanged: (val){setState(() => organizationName = val);},),
+                },onChanged: (val){setState(() => _organizationName = val);},),
               SizedBox(height: 10.0),
               RaisedButton(shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15.0),
                 side: BorderSide(color: Colors.teal, style: BorderStyle.solid, width: 2.0,),),
                   child: Text('Done', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, color: Colors.white),),
                   elevation: 10.0, color: Colors.teal,
                   onPressed: ()async {
-                    if(_formKey.currentState.validate()){
-                      await updateOrgName(organizationName ?? managerData.orgName);
-                      Navigator.of(context).pop();}})],),),),);}else{return Loading();}});});}
+                    if(_formKey5.currentState.validate()){
+                      await updateOrgName(_organizationName ?? orgName);
+                      Navigator.of(context).pop();}})],),),),);});}
 
 
 
-  Future<void> _areas(BuildContext context){
+  Future<void> _Updateareas(BuildContext context,areas){
     return showDialog(context: context, builder: (BuildContext context){
-      final manager = Provider.of<EventManager>(context);
-      return StreamBuilder<EventManager>(stream:EventManager(uid: manager.uid).managerdata, builder: (context, snapshot) {
-        if(snapshot.hasData){EventManager managerData=snapshot.data;
         return AlertDialog(shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
           backgroundColor: Colors.white, title: Text("Edit Serving Areas", style: TextStyle(fontWeight: FontWeight.bold, fontStyle: FontStyle.italic, fontSize: 25.0,),),
-          content: SingleChildScrollView(child: Form(key: _formKey,
+          content: SingleChildScrollView(child: Form(key: _formKey6,
             child: ListBody(children: <Widget>[
-              TextFormField(initialValue: managerData.servingAreas, autofocus: false, decoration: new InputDecoration(
+              TextFormField(initialValue: areas, autofocus: false, decoration: new InputDecoration(
                 focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(1.0)),
                   borderSide: BorderSide(color: Colors.teal, style: BorderStyle.solid, width: 2.5,),),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0),),),
@@ -520,16 +542,16 @@ class _CredentialsState extends State<Credentials> {
                                     return 'Invalid Serving Area';
                                   else
                                     return null;
-                                },onChanged: (val){setState(() => servingAreas = val);},),
+                                },onChanged: (val){setState(() => _servingAreas = val);},),
               SizedBox(height: 10.0),
               RaisedButton(shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15.0),
                 side: BorderSide(color: Colors.teal, style: BorderStyle.solid, width: 2.0,),),
                   child: Text('Done', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, color: Colors.white),),
                   elevation: 10.0, color: Colors.teal,
                   onPressed: ()async {
-                    if(_formKey.currentState.validate()){
-                      await updateServingAreas(servingAreas ?? managerData.servingAreas);
-                      Navigator.of(context).pop();}})],),),),);}else{return Loading();}});});}
+                    if(_formKey6.currentState.validate()){
+                      await updateServingAreas(_servingAreas ?? areas);
+                      Navigator.of(context).pop();}})],),),),);});}
 
 
 }

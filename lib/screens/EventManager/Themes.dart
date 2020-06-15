@@ -93,7 +93,7 @@ class _ThemesState extends State<Themes> {
                           decoration: new BoxDecoration(
                             image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: AssetImage('assets/backgorund3.jpg')),
+                                image: AssetImage('assets/background15.jpg')),
                           ),
                           child:new Center(
                             child: managerData.themes.length==0?
@@ -101,8 +101,9 @@ class _ThemesState extends State<Themes> {
                               style: TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold,
-                              color: Colors.teal),
+                              color: Colors.white),
                             ):Container(
+                              margin:EdgeInsets.all(6.0),
                               child: new ListView.builder(
                                 itemCount: managerData.themes.length,
                                 itemBuilder: (BuildContext context, int index) {
@@ -112,12 +113,16 @@ class _ThemesState extends State<Themes> {
                                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
                                           SizedBox(width: 5.0,),
-                                          Text(managerData.themes[index]),
+                                          Text(managerData.themes[index],
+                                            style:TextStyle(
+                                                fontSize: 17.0,
+
+                                            ),),
                                           Spacer(),
                                           IconButton(
                                             icon: Icon(Icons.edit),
                                             onPressed:() {
-                                              _Description1(context, index);
+                                              _Description1(context,managerData.themes[index] ,index);
                                             },
                                           ),
                                           IconButton(
@@ -261,17 +266,11 @@ class _ThemesState extends State<Themes> {
         }
     );
   }
-  Future<void> _Description1(BuildContext context,int index){
+  Future<void> _Description1(BuildContext context,String theme,int index){
 
     return showDialog(
         context: context,
         builder: (BuildContext context){
-          final manager = Provider.of<EventManager>(context);
-          return StreamBuilder<EventManager>(
-              stream:EventManager(uid: manager.uid).managerdata,
-              builder: (context, snapshot) {
-                if(snapshot.hasData){
-                  EventManager managerData=snapshot.data;
                   return AlertDialog(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0))
@@ -291,7 +290,7 @@ class _ThemesState extends State<Themes> {
                         child: ListBody(
                           children: <Widget>[
                             TextFormField(
-                              initialValue: managerData.themes[index],
+                              initialValue: theme,
                               autofocus: false,
                               decoration: new InputDecoration(
                                 focusedBorder: OutlineInputBorder(
@@ -340,7 +339,7 @@ class _ThemesState extends State<Themes> {
                                 color: Colors.teal,
                                 onPressed: ()async {
                                   if(_formKey.currentState.validate()){
-                                    await updateToDatabase(_theme ?? managerData.themes[index],index);
+                                    await updateToDatabase(_theme ?? theme,index);
                                     Navigator.of(context).pop();
                                     //Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => Services()));
                                   }
@@ -352,12 +351,7 @@ class _ThemesState extends State<Themes> {
                       ),
                     ),
                   );
-                }else{
-                  return Loading();
-                }
 
-              }
-          );
         }
     );
 

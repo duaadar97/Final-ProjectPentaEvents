@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:shimmer/shimmer.dart';
 
 
 
@@ -134,66 +135,89 @@ class _UploadLogoPageState extends State<UploadLogoPage> {
     return loading ? Loading()
         : new  MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Scaffold(
-      appBar: new AppBar(
-        title: new Text('Upload Logo'),
-        centerTitle: true,
-        backgroundColor: Colors.teal[400],
-        elevation: 0.0,
-      ),
+          home: Scaffold(
+            appBar: new AppBar(
+              title: new Text('Upload Logo'),
+              centerTitle: true,
+              backgroundColor: Colors.teal,
+              elevation: 0.0,
+              leading: IconButton(
+                onPressed: () {
+                  //Navigator.of(context).pop();
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) {
+                    return View();
+                  }));
+                },
+                icon: Icon(Icons.arrow_back),
+              ),
+            ),
       body:
-      SingleChildScrollView(
-        child: Container(
-          decoration: new BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/backgorund3.jpg')),
-          ),
-          child: Column(
-            children: <Widget>[
 
-              sampleImage == null ?
-              Column(
-                children: <Widget>[
-                  SizedBox(height:300,),
-                  new Center(
-                    child: Text('Select an image'),
-                  ),
-                  SizedBox(height: 265,),
-                  RaisedButton(
-                    //color: Colors.teal[400],
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(15.0),
-                        side: BorderSide(
-                          color: Colors.teal, //Color of the border
-                          style: BorderStyle.solid, //Style of the border
-                          width: 1.0, //width of the border
+               Container(
+                height:651.0,
+                decoration: new BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage('assets/background15.jpg')),
+                ),
+                child: Column(
+                  children: <Widget>[
+
+                    sampleImage == null ?
+                    Column(
+                      children: <Widget>[
+                        SizedBox(height:300,),
+                        new Center(
+                          child: Text('Select an image',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15.0,
+                            ),
+                          ),
                         ),
-                      ),
-                      child: Text(
-                        'Select',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                            color: Colors.white),
-                      ),
-                      elevation: 20.0,
-                      //splashColor: Colors.black12,
-                      color: Colors.teal,
-                      onPressed: () {
-                        _showDialog1(context);
-                      }),
+                        SizedBox(height: 265,),
+                        RaisedButton(
+                          //color: Colors.teal[400],
+                            shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(15.0),
+                              side: BorderSide(
+                                color: Colors.teal, //Color of the border
+                                style: BorderStyle.solid, //Style of the border
+                                width: 1.0, //width of the border
+                              ),
+                            ),
+                          child:Shimmer.fromColors(
+                              period: Duration(milliseconds: 1500),
+                              baseColor: Colors.white,
+                              highlightColor: Colors.tealAccent,
+                            child: Text(
+                              'Select',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                 // color: Colors.white,
+                                fontFamily:'Pacifico',
+                              ),
+                            ),
+                          ),
+                            elevation: 10.0,
+                            //splashColor: Colors.black12,
+                            color: Colors.teal,
+                            onPressed: () {
+                              _showDialog1(context);
+                            }),
 
-                ],
-              )
-                  : enableUpload(),
+                      ],
+                    )
+                        : enableUpload(),
 
 
-            ],
-          ),
-        ),
-      ),
-    ));
+                  ],
+                ),
+              ),
+            ),
+    );
   }
 
   Widget enableUpload(){
@@ -215,13 +239,21 @@ class _UploadLogoPageState extends State<UploadLogoPage> {
                     width: 2.0, //width of the border
                   ),
                 ),
+
+              child:Shimmer.fromColors(
+                  period: Duration(milliseconds: 1500),
+                  baseColor: Colors.white,
+                  highlightColor: Colors.tealAccent,
                 child: Text(
                   'Upload',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25.0,
-                      color: Colors.white),
-                ),
+                      fontFamily:'Pacifico',
+                  //    color: Colors.white
+
+                  ),
+                ),),
                 elevation: 10.0,
                 //splashColor: Colors.black12,
                 color: Colors.teal,

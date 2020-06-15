@@ -1,4 +1,5 @@
 import 'package:ajeeb/models/eventManager.dart';
+import 'package:ajeeb/screens/EventManager/ViewListTileProfileEvent.dart';
 import 'package:ajeeb/screens/EventManager/ViewProfile.dart';
 import 'package:ajeeb/shared/loading.dart';
 //import 'package:ajeeb/screens/managerScreens/setProfile.dart';
@@ -10,7 +11,10 @@ import 'package:ajeeb/services/auth.dart';
 import 'package:ajeeb/screens/EventManager/Nearest.dart';
 import 'package:provider/provider.dart';
 
+import '../AboutUs.dart';
+import '../ContactUs.dart';
 import '../Ratings.dart';
+import '../Reviews.dart';
 
 //void main() => runApp(MaterialApp(
 //    debugShowCheckedModeBanner: false,
@@ -41,7 +45,7 @@ class _HomePageState extends State<HomePage> {
 
   navigateToDetail(DocumentSnapshot document) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return ProfilePage(document: document);
+      return ProfilePageEvent(document: document);
     }));
   }
 
@@ -112,18 +116,18 @@ class _HomePageState extends State<HomePage> {
                         leading: Icon(Icons.phone_in_talk),
                         title: new Text("Contact us"),
                         onTap: () {
-//                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-//                    return Contact();
-//                  }));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return Contact();
+                            }));
                         },
                       ),
                       new ListTile(
                         leading: Icon(Icons.people),
                         title: new Text("About us"),
                         onTap: () {
-//                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-//                    return About();
-//                  }));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return About();
+                          }));
                         },
                       ),
                       new ListTile(
@@ -131,9 +135,9 @@ class _HomePageState extends State<HomePage> {
                         title: new Text("Reviews"),
                         onTap: () {
                           print("testing reviews");
-//                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-//                    return AddReview();
-//                  }));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return AddReview();
+                            }));
                         },
                       ),
                       new ListTile(
@@ -142,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                               Navigator.push(context, MaterialPageRoute(builder: (
                               context) {
-                            return View();
+                            return Rate();
                           }));
                         },
                       ),
@@ -157,170 +161,168 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                       new ListTile(
-                        leading: Icon(Icons.edit),
-                        title: new Text("Edit Credentials"),
-                        onTap: () {
-//                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-//                    return EditCredentials();
-//                  }));
-                        },
-                      ),
-                      new ListTile(
                           leading: Icon(Icons.lock),
                           title: new Text("Logout"),
                           onTap: () async {
                             await _auth.signOut();
                           }),
                     ])),
-                body: SingleChildScrollView(
-                    child: Column(children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          RaisedButton.icon(
-                            onPressed: () {
-                              //Navigator.of(context).pop();
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                    return GoToNearest();
-                                  }));
-                            },
-                            shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(15.0),
+                body: Container(
+                  decoration: new BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('assets/background15.jpg')),
+                  ),
+                  child: SingleChildScrollView(
+                      child: Column(children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            RaisedButton.icon(
+                              onPressed: () {
+                                //Navigator.of(context).pop();
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return GoToNearest();
+                                    }));
+                              },
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(15.0),
+                              ),
+                              color: Colors.teal,
+                              icon: Icon(
+                                Icons.directions_run,
+                                color: Colors.white,
+                              ),
+                              label: Text('Nearest',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  )),
                             ),
-                            color: Colors.teal,
-                            icon: Icon(
-                              Icons.directions_run,
-                              color: Colors.white,
-                            ),
-                            label: Text('Nearest',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                )),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
 
-                      Row(children: [
-                        Expanded(
-                            child: SizedBox(
-                                height: 725.0,
-                                child: StreamBuilder<QuerySnapshot>(
-                                  //if (snapshot.hasData)
-                                  stream: (searchString == null ||
-                                      searchString.trim() == "")
-                                  //||
-                                  // (searchStringByArea == null || searchStringByArea.trim() == "")
-                                      ? Firestore.instance
-                                      .collection("Event_manager")
-                                      .snapshots()
-                                      : Firestore.instance
-                                      .collection("Event_manager")
-                                      .where("SearchByOrgName",
-                                      arrayContains: searchString)
-                                  //.where("SearchByArea", arrayContains: searchStringByArea)
-                                      .snapshots(),
-                                  // ignore: missing_return
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasError)
-                                      return Text('Error: ${snapshot.error}');
-                                    switch (snapshot.connectionState) {
-                                      case ConnectionState.waiting:
-                                        return Center(
-                                            child: CircularProgressIndicator());
+                        Row(children: [
+                          Expanded(
+                              child: SizedBox(
+                                  height: 725.0,
+                                  child: StreamBuilder<QuerySnapshot>(
+                                    //if (snapshot.hasData)
+                                    stream: (searchString == null ||
+                                        searchString.trim() == "")
+                                    //||
+                                    // (searchStringByArea == null || searchStringByArea.trim() == "")
+                                        ? Firestore.instance
+                                        .collection("Event_manager")
+                                        .snapshots()
+                                        : Firestore.instance
+                                        .collection("Event_manager")
+                                        .where("SearchByOrgName",
+                                        arrayContains: searchString)
+                                    //.where("SearchByArea", arrayContains: searchStringByArea)
+                                        .snapshots(),
+                                    // ignore: missing_return
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasError)
+                                        return Text('Error: ${snapshot.error}');
+                                      switch (snapshot.connectionState) {
+                                        case ConnectionState.waiting:
+                                          return Center(
+                                              child: CircularProgressIndicator());
 
-                                      default:
-                                        return new ListView(
-                                          physics: BouncingScrollPhysics(),
-                                          children: snapshot.data.documents
-                                              .map((DocumentSnapshot document) {
-                                            return new Column(
-                                                children: <Widget>[
-                                                  Card(
-                                                      elevation: 25.0,
-                                                      margin: new EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 10.0,
-                                                          vertical: 15.0),
-                                                      child: Container(
-                                                        //children: <Widget>[]
-                                                        height: 150.0,
+                                        default:
+                                          return new ListView(
+                                            physics: BouncingScrollPhysics(),
+                                            children: snapshot.data.documents
+                                                .map((DocumentSnapshot document) {
+                                              return new Column(
+                                                  children: <Widget>[
+                                                    Card(
+                                                        elevation: 25.0,
+                                                        margin: new EdgeInsets
+                                                            .symmetric(
+                                                            horizontal: 10.0,
+                                                            vertical: 15.0),
+                                                        child: Container(
+                                                          //children: <Widget>[]
+                                                          height: 150.0,
 
 //                                            aw2child: Column(
 //                                              children: <Widget>[
-                                                        //decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
-                                                        child: Stack(
-                                                          children: <Widget>[
-                                                            Row(
-                                                              children: <
-                                                                  Widget>[
-                                                                Expanded(
-                                                                  child: Container(
-                                                                    height: 500.0,
-                                                                    decoration: BoxDecoration(
-                                                                        image: DecorationImage(
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                          image:
-                                                                          new CachedNetworkImageProvider(
-                                                                            document['Event_Cover'],
-                                                                          ),
-                                                                        )),
-                                                                  ),
-                                                                )
-                                                              ],
-                                                            ),
-                                                            ListTile(
-                                                              onTap: () {
-                                                                navigateToDetail(
-                                                                    document);
-                                                              },
-                                                            ),
-                                                            Positioned(
-                                                              top: 60.0,
-                                                              child: Container(
-                                                                height: 80.0,
-                                                                width: 80.0,
-                                                                decoration: BoxDecoration(
-                                                                    shape: BoxShape
-                                                                        .circle,
-                                                                    image: DecorationImage(
-                                                                      fit: BoxFit
-                                                                          .fill,
-                                                                      image:
-                                                                      new CachedNetworkImageProvider(
-                                                                        document['Event_Logo'],
-                                                                      ),
+                                                          //decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
+                                                          child: Stack(
+                                                            children: <Widget>[
+                                                              Row(
+                                                                children: <
+                                                                    Widget>[
+                                                                  Expanded(
+                                                                    child: Container(
+                                                                      height: 500.0,
+                                                                      decoration: BoxDecoration(
+                                                                          image: DecorationImage(
+                                                                            fit: BoxFit
+                                                                                .cover,
+                                                                            image:
+                                                                            new CachedNetworkImageProvider(
+                                                                              document['Event_Cover'],
+                                                                            ),
+                                                                          )),
                                                                     ),
-                                                                    border: Border
-                                                                        .all(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        width: 3.0)),
+                                                                  )
+                                                                ],
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
+                                                              ListTile(
+                                                                onTap: () {
+                                                                  navigateToDetail(
+                                                                      document);
+                                                                },
+                                                              ),
+                                                              Positioned(
+                                                                top: 60.0,
+                                                                child: Container(
+                                                                  height: 80.0,
+                                                                  width: 80.0,
+                                                                  decoration: BoxDecoration(
+                                                                      shape: BoxShape
+                                                                          .circle,
+                                                                      image: DecorationImage(
+                                                                        fit: BoxFit
+                                                                            .fill,
+                                                                        image:
+                                                                        new CachedNetworkImageProvider(
+                                                                          document['Event_Logo'],
+                                                                        ),
+                                                                      ),
+                                                                      border: Border
+                                                                          .all(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          width: 3.0)),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
 //
-                                                      )),
-                                                  Center(
-                                                      child: Text(
-                                                          document['Event_orgName'],
-                                                          style: TextStyle(
-                                                            color: Colors.teal,
-                                                            fontSize: 20.0,
-                                                          ))),
-                                                ]);
-                                          }).toList(),
-                                        );
-                                    }
-                                  },
-                                )))
+                                                        )),
+                                                    Center(
+                                                        child: Text(
+                                                            document['Event_orgName'],
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontSize: 20.0,
+                                                            ))),
+                                                  ]);
+                                            }).toList(),
+                                          );
+                                      }
+                                    },
+                                  )))
 
 
-                      ])
-                    ]))));
+                        ])
+                      ])),
+                )));
           }
           else {
             return Loading();

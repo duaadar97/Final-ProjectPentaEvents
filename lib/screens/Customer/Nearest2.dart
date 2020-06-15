@@ -55,6 +55,12 @@ class _GoToNearestState extends State<GoToNearest> {
         home:Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.teal,
+              leading:IconButton(
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(Icons.arrow_back),
+              ),
               actions: <Widget>[
                 IconButton(
                   onPressed: () {
@@ -92,83 +98,6 @@ class _GoToNearestState extends State<GoToNearest> {
               ],
               title: cusSearchBar,
             ),
-
-//            drawer: new Drawer(
-//                child: new ListView(children: <Widget>[
-//                  new UserAccountsDrawerHeader(
-//                    decoration: BoxDecoration(color: Colors.teal),
-////                    accountName: new Text(managerData.orgName),
-////                    accountEmail: new Text(managerData.email),
-////                    currentAccountPicture: new GestureDetector(
-////                      child: new CircleAvatar(
-////                        backgroundImage: managerData.logo == 'logo'
-////                            ? AssetImage('assets/logo1.jpg')
-////                            : NetworkImage(managerData.logo),
-////                      ),
-////                    ),
-//                  ),
-//                  new ListTile(
-//                    leading: Icon(Icons.phone_in_talk),
-//                    title: new Text("Contact us"),
-//                    onTap: () {
-////                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-////                    return Contact();
-////                  }));
-//                    },
-//                  ),
-//                  new ListTile(
-//                    leading: Icon(Icons.people),
-//                    title: new Text("About us"),
-//                    onTap: () {
-////                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-////                    return About();
-////                  }));
-//                    },
-//                  ),
-//                  new ListTile(
-//                    leading: Icon(Icons.comment),
-//                    title: new Text("Reviews"),
-//                    onTap: () {
-////                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-////                    return AddReview();
-////                  }));
-//                    },
-//                  ),
-//                  new ListTile(
-//                    leading: Icon(Icons.star),
-//                    title: new Text("Ratings"),
-//                    onTap: () {
-////                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-////                    return Rate();
-////                  }));
-//                    },
-//                  ),
-//                  new ListTile(
-//                    leading: Icon(Icons.perm_identity),
-//                    title: new Text("View Profile"),
-//                    onTap: () {
-//                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-//                        return View();
-//                      }));
-//                    },
-//                  ),
-//                  new ListTile(
-//                    leading: Icon(Icons.edit),
-//                    title: new Text("Edit Credentials"),
-//                    onTap: () {
-////                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-////                    return EditCredentials();
-////                  }));
-//                    },
-//                  ),
-//                  new ListTile(
-//                      leading: Icon(Icons.lock),
-//                      title: new Text("Logout"),
-//                      onTap: () async {
-//                        await _auth.signOut();
-//                      }),
-//                ])),
-
             body: Container(
                 decoration: new BoxDecoration(
                   image: DecorationImage(

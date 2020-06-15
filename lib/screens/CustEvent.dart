@@ -29,20 +29,20 @@ class CustEvent extends StatelessWidget {
             resizeToAvoidBottomPadding: false,
             appBar: AppBar(
               title: Text("LogIn"),
-              leading: IconButton(
+//              leading: IconButton(
 //                onPressed: () {
 //                  Navigator.push(context, MaterialPageRoute(builder: (context) {
 //                    return MyWelcome();
 //                  }));
 //                },
-                icon: Icon(Icons.arrow_back),
-              ),
+//                icon: Icon(Icons.arrow_back),
+//              ),
               backgroundColor: Colors.teal,
             ),
             body: Container(
                 decoration: new BoxDecoration(
                   image: DecorationImage(
-                      fit: BoxFit.cover, image: AssetImage('assets/backgorund3.jpg')),
+                      fit: BoxFit.cover, image: AssetImage('assets/background15.jpg')),
                 ),
                 child: SingleChildScrollView(
                   child: Center(
@@ -61,7 +61,7 @@ class CustEvent extends StatelessWidget {
                                 side: BorderSide(
                                   color: Colors.white, //Color of the border
                                   style: BorderStyle.solid, //Style of the border
-                                  width: 2.0, //width of the border
+                                  width: 1.0, //width of the border
                                 ),
                               ),
                               textColor: Colors.white,
@@ -96,7 +96,7 @@ class CustEvent extends StatelessWidget {
                                 side: BorderSide(
                                   color: Colors.white, //Color of the border
                                   style: BorderStyle.solid, //Style of the border
-                                  width: 2.0, //width of the border
+                                  width: 1.0, //width of the border
                                 ),
                               ),
                               textColor: Colors.white,

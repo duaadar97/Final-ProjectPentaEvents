@@ -79,7 +79,7 @@ class _ServicesState extends State<Services> {
                     decoration: new BoxDecoration(
                       image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage('assets/backgorund3.jpg')),
+                          image: AssetImage('assets/background15.jpg')),
                     ),
                     child:new Center(
                       child: managerData.services.length==0?
@@ -87,8 +87,9 @@ class _ServicesState extends State<Services> {
                         style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
-                        color: Colors.teal),
+                        color: Colors.white),
                       ):Container(
+                        margin:EdgeInsets.all(6.0),
                         child: new ListView.builder(
                           itemCount: managerData.services.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -98,12 +99,15 @@ class _ServicesState extends State<Services> {
                                   //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
                                     SizedBox(width: 5.0,),
-                                    Text(managerData.services[index]),
+                                    Text(managerData.services[index],
+                                      style:TextStyle(
+                                          fontSize: 17.0,
+                                      ),),
                                     Spacer(),
                                     IconButton(
                                       icon: Icon(Icons.edit),
                                       onPressed:() {
-                                        _Description1(context, index);
+                                        _Description1(context,managerData.services[index], index);
                                         },
                                     ),
                                     IconButton(
@@ -245,17 +249,11 @@ class _ServicesState extends State<Services> {
         }
     );
   }
-  Future<void> _Description1(BuildContext context,int index){
+  Future<void> _Description1(BuildContext context,String service,int index){
 
     return showDialog(
         context: context,
         builder: (BuildContext context){
-          final manager = Provider.of<EventManager>(context);
-          return StreamBuilder<EventManager>(
-              stream:EventManager(uid: manager.uid).managerdata,
-              builder: (context, snapshot) {
-                if(snapshot.hasData){
-                  EventManager managerData=snapshot.data;
                   return AlertDialog(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0))
@@ -275,7 +273,7 @@ class _ServicesState extends State<Services> {
                         child: ListBody(
                           children: <Widget>[
                             TextFormField(
-                              initialValue: managerData.services[index],
+                              initialValue: service,
                               autofocus: false,
                               decoration: new InputDecoration(
                                 focusedBorder: OutlineInputBorder(
@@ -324,7 +322,7 @@ class _ServicesState extends State<Services> {
                                 color: Colors.teal,
                                 onPressed: ()async {
                                   if(_formKey.currentState.validate()){
-                                    await updateToDatabase(_service ?? managerData.services[index],index);
+                                    await updateToDatabase(_service ?? service,index);
                                     Navigator.of(context).pop();
                                     //Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => Services()));
                                   }
@@ -336,12 +334,7 @@ class _ServicesState extends State<Services> {
                       ),
                     ),
                   );
-                }else{
-                  return Loading();
-                }
 
-              }
-          );
         }
     );
 

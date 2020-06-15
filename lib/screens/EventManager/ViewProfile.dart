@@ -101,7 +101,7 @@ class _MyEvents extends State<MyEvents> {
         appBar: new AppBar(
           title: new Text('Upload Image'),
           centerTitle: true,
-          backgroundColor: Colors.teal[400],
+          backgroundColor: Colors.teal,
           elevation: 0.0,
         ),
         body: Container(
@@ -189,10 +189,11 @@ class _MyEvents extends State<MyEvents> {
                   decoration: new BoxDecoration(
                     image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage('assets/backgorund3.jpg')),
+                        image: AssetImage('assets/background15.jpg')),
                   ),
 
                   child: new ListView(
+                    physics: BouncingScrollPhysics(),
                     children: <Widget>[
                       new Column(
                         children: <Widget>[
@@ -312,7 +313,7 @@ class _MyEvents extends State<MyEvents> {
                                               children: <Widget>[
                                                 Text(managerData.orgName,
                                                     style: TextStyle(
-                                                        fontWeight: FontWeight.bold, fontSize: 25.0,color: Colors.teal))
+                                                        fontWeight: FontWeight.bold, fontSize: 25.0,color: Colors.white))
                                               ],
                                             ),
                                           ),
@@ -393,7 +394,7 @@ class _MyEvents extends State<MyEvents> {
                                                     SizedBox(
                                                       width: 5.0,
                                                     ),
-                                                    Text('Timings',
+                                                    Text('9:00 AM - 5:00 PM',
                                                       style: TextStyle(fontSize: 16.0),
                                                     )
                                                   ],
